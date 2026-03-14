@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fomo Goods | Monthly T-Shirt Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F00480;
+            --secondary: #040768;
+            --accent: #FFB800;
+            --ctaGreen: #28A745;
+            --ctaGreenHover: #218838;
+            --background: #FFFFFF;
+            --backgroundAlt: #F8F9FA;
+            --headerBg: #040768;
+            --footerBg: #040768;
+            --textPrimary: #1A1A1A;
+            --textSecondary: #555555;
+            --textWhite: #FFFFFF;
+            --priceRed: #E63946;
+            --starGold: #FFB800;
+            --cardBorder: #E8E8E8;
+            --inputBorder: #D0D0D0;
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Satoshi', sans-serif;
+            
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --max-width: 1100px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--textPrimary);
+            background-color: var(--background);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--headerBg);
+            color: var(--textWhite);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--textWhite);
+        }
+
+        .support-email {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-decoration: none;
+            color: var(--textWhite);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr 1fr;
+                padding: 4rem 0;
+            }
+        }
+
+        /* Product Images */
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background-color: var(--backgroundAlt);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1;
+            background-color: var(--backgroundAlt);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Checkout Column */
+        .checkout-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .countdown {
+            background-color: var(--backgroundAlt);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--cardBorder);
+        }
+
+        .countdown-text {
+            font-size: 0.875rem;
+            color: var(--textSecondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .timer-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            color: var(--textSecondary);
+            letter-spacing: 1px;
+        }
+
+        .hero-headline {
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            color: var(--textPrimary);
+        }
+
+        .hero-subheadline {
+            font-size: 1.125rem;
+            color: var(--textSecondary);
+            font-weight: 500;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--textSecondary);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            font-size: 0.9375rem;
+        }
+
+        /* Wizard */
+        .wizard {
+            background: var(--background);
+            border: 1px solid var(--cardBorder);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .wizard-header {
+            display: flex;
+            border-bottom: 1px solid var(--cardBorder);
+            background: var(--backgroundAlt);
+        }
+
+        .wizard-step-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--textSecondary);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .wizard-step-tab.active {
+            color: var(--primary);
+        }
+
+        .wizard-step-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .wizard-body {
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .wizard-step {
+            padding: 2rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .wizard-step.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .wizard-step.exit-left {
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+
+        /* Banners */
+        .shipping-banner {
+            background-color: var(--secondary);
+            color: var(--textWhite);
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Order Bump */
+        .order-bump {
+            background-color: #FFFDF0;
+            border: 2px dashed var(--accent);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: pulse-border 2s infinite;
+            transition: transform 0.2s ease;
+        }
+
+        .order-bump:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: rgba(255, 184, 0, 0.4); }
+            50% { border-color: rgba(255, 184, 0, 1); }
+            100% { border-color: rgba(255, 184, 0, 0.4); }
+        }
+
+        .bump-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .bump-checkbox {
+            width: 24px;
+            height: 24px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .bump-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--textPrimary);
+        }
+
+        .bump-desc {
+            font-size: 0.875rem;
+            color: var(--textSecondary);
+            margin-top: 0.25rem;
+        }
+
+        .bump-price {
+            font-weight: 700;
+            color: var(--priceRed);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--textPrimary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--inputBorder);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(240, 4, 128, 0.1);
+        }
+
+        .size-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .size-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--cardBorder);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .size-option:hover {
+            border-color: var(--primary);
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--backgroundAlt);
+            border-radius: 4px;
+            padding: 0.25rem;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--textPrimary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--textWhite);
+        }
+
+        .btn-primary:hover {
+            background-color: #d0036f;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(240, 4, 128, 0.3);
+        }
+
+        .btn-success {
+            background-color: var(--ctaGreen);
+            color: var(--textWhite);
+            font-size: 1.25rem;
+            padding: 1.25rem;
+        }
+
+        .btn-success:hover {
+            background-color: var(--ctaGreenHover);
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .secure-text {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--textSecondary);
+            margin-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--cardBorder);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--cardBorder);
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--sectionPadding);
+        }
+
+        .section-dark {
+            background-color: var(--secondary);
+            color: var(--textWhite);
+            position: relative;
+        }
+
+        .section-dark::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--textSecondary);
+            margin-bottom: 3rem;
+        }
+        
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* How it works */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--backgroundAlt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Mission Card */
+        .mission-card {
+            background: var(--background);
+            color: var(--textPrimary);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .testimonial-card {
+            background: var(--backgroundAlt);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--cardBorder);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .stars {
+            color: var(--starGold);
+            margin-bottom: 1rem;
+        }
+
+        /* Size Chart */
+        .size-chart {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .size-chart th, .size-chart td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--cardBorder);
+        }
+
+        .size-chart th {
+            background: var(--backgroundAlt);
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footerBg);
+            color: var(--textWhite);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--textWhite);
+        }
+        
+        /* Placeholder styling */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Fomo Goods</a>
+        <a href="mailto:support@fomogoods.com" class="support-email">support@fomogoods.com</a>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <!-- Left Column: Product Images -->
+                <div class="product-gallery">
+                    <div class="main-image" id="mainImage">
+                        <div class="placeholder-img">Fomo Goods OG Tee<br>Front View</div>
+                    </div>
+                    <div class="thumbnails">
+                        <div class="thumbnail active" onclick="swapImage(this, 'Front View')">
+                            <div class="placeholder-img" style="font-size: 0.75rem;">Front</div>
+                        </div>
+                        <div class="thumbnail" onclick="swapImage(this, 'Back View')">
+                            <div class="placeholder-img" style="font-size: 0.75rem;">Back</div>
+                        </div>
+                        <div class="thumbnail" onclick="swapImage(this, 'Lifestyle 1')">
+                            <div class="placeholder-img" style="font-size: 0.75rem;">Life 1</div>
+                        </div>
+                        <div class="thumbnail" onclick="swapImage(this, 'Lifestyle 2')">
+                            <div class="placeholder-img" style="font-size: 0.75rem;">Life 2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Checkout -->
+                <div class="checkout-col">
+                    <div class="countdown">
+                        <div class="countdown-text">You can keep buying until the campaign ends...</div>
+                        <div class="timer" id="countdownTimer">
+                            <div class="timer-block">
+                                <span id="days">03</span>
+                                <span class="timer-label">Days</span>
+                            </div>
+                            <span>:</span>
+                            <div class="timer-block">
+                                <span id="hours">14</span>
+                                <span class="timer-label">Hours</span>
+                            </div>
+                            <span>:</span>
+                            <div class="timer-block">
+                                <span id="minutes">45</span>
+                                <span class="timer-label">Mins</span>
+                            </div>
+                            <span>:</span>
+                            <div class="timer-block">
+                                <span id="seconds">22</span>
+                                <span class="timer-label">Secs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="hero-headline">Get Your First T-Shirt for $10 — Join the Club Today!</h1>
+                    <p class="hero-subheadline">Lock in your first exclusive design for just $10</p>
+                    
+                    <div class="testimonial-quote">
+                        "I love getting a new shirt every month from this club — they're well-designed, unique, and truly represent the community."
+                    </div>
+
+                    <div class="wizard">
+                        <div class="wizard-header">
+                            <div class="wizard-step-tab active" id="tab1">Step 1: Size</div>
+                            <div class="wizard-step-tab" id="tab2">Step 2: Info</div>
+                            <div class="wizard-step-tab" id="tab3">Step 3: Ship</div>
+                        </div>
+
+                        <div class="wizard-body">
+                            <!-- Step 1 -->
+                            <div class="wizard-step active" id="step1">
+                                <div class="shipping-banner">FREE SHIPPING ON 2 OR MORE</div>
+                                
+                                <label class="order-bump">
+                                    <div class="bump-header">
+                                        <input type="checkbox" class="bump-checkbox" id="clubBump" checked>
+                                        <div>
+                                            <div class="bump-title">Grab this T-Shirt for just $10 when you join the Monthly Club</div>
+                                            <div class="bump-desc">Checking this enrolls you in the $19.95/month club after your first month. Cancel anytime.</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 2.5rem; margin-bottom: 0;">
+                                        <select class="form-control" id="bumpSize">
+                                            <option value="">Select Size...</option>
+                                            <option value="S">Small</option>
+                                            <option value="M">Medium</option>
+                                            <option value="L">Large</option>
+                                            <option value="XL">X-Large</option>
+                                            <option value="2XL">2XL</option>
+                                            <option value="3XL">3XL</option>
+                                            <option value="4XL">4XL</option>
+                                        </select>
+                                    </div>
+                                </label>
+
+                                <div style="text-align: center; margin: 1rem 0; color: var(--textSecondary); font-weight: 600;">OR BUY SINGLE SHIRTS</div>
+
+                                <div class="size-selector">
+                                    <div class="size-option">
+                                        <span>Small — $19.95</span>
+                                        <div class="qty-controls">
+                                            <button class="qty-btn">-</button>
+                                            <span>0</span>
+                                            <button class="qty-btn">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="size-option">
+                                        <span>Medium — $19.95</span>
+                                        <div class="qty-controls">
+                                            <button class="qty-btn">-</button>
+                                            <span>0</span>
+                                            <button class="qty-btn">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="size-option">
+                                        <span>Large — $19.95</span>
+                                        <div class="qty-controls">
+                                            <button class="qty-btn">-</button>
+                                            <span>0</span>
+                                            <button class="qty-btn">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" onclick="nextStep(2)">CONTINUE &rarr;</button>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="wizard-step" id="step2">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" placeholder="John">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="john@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" placeholder="(555) 123-4567">
+                                </div>
+                                <button class="btn btn-primary" onclick="nextStep(3)">CONTINUE &rarr;</button>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="wizard-step" id="step3">
+                                <div class="shipping-banner">FREE SHIPPING WHEN YOU BUY 2 OR MORE</div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Shipping Address</label>
+                                    <input type="text" class="form-control" placeholder="123 Main St" style="margin-bottom: 0.5rem;">
+                                    <input type="text" class="form-control" placeholder="Apt, Suite, etc. (optional)" style="margin-bottom: 0.5rem;">
+                                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.5rem;">
+                                        <input type="text" class="form-control" placeholder="City">
+                                        <input type="text" class="form-control" placeholder="State">
+                                        <input type="text" class="form-control" placeholder="ZIP">
+                                    </div>
+                                </div>
+
+                                <label class="order-bump" style="border-color: var(--secondary); background: var(--backgroundAlt); animation: none;">
+                                    <div class="bump-header">
+                                        <input type="checkbox" class="bump-checkbox" id="hoodieBump">
+                                        <div>
+                                            <div class="bump-title">Grab the Matching Hoodie — $39.95</div>
+                                            <div class="bump-desc">Stay warm and stay exclusive. Premium hoodie featuring the same winning design. Limited run.</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 2.5rem; margin-bottom: 0;">
+                                        <select class="form-control">
+                                            <option value="">Select Size...</option>
+                                            <option value="S">Small</option>
+                                            <option value="M">Medium</option>
+                                            <option value="L">Large</option>
+                                            <option value="XL">X-Large</option>
+                                        </select>
+                                    </div>
+                                </label>
+
+                                <div class="form-group">
+                                    <label class="form-label">Payment Details</label>
+                                    <input type="text" class="form-control" placeholder="Card Number" style="margin-bottom: 0.5rem;">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                        <input type="text" class="form-control" placeholder="MM/YY">
+                                        <input type="text" class="form-control" placeholder="CVV">
+                                    </div>
+                                </div>
+
+                                <div class="order-summary">
+                                    <div class="summary-row">
+                                        <span>Fomo Goods OG Tee (Club Promo)</span>
+                                        <span>$10.00</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Shipping</span>
+                                        <span>$4.95</span>
+                                    </div>
+                                    <div class="summary-total">
+                                        <span>Total</span>
+                                        <span>$14.95</span>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-success" onclick="submitOrder()">COMPLETE PURCHASE</button>
+                                <div class="secure-text">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    We Never Share Your Information With Anyone
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="section background-alt">
+            <div class="container">
+                <h2 class="section-title">BECOMING A MONTHLY MEMBER</h2>
+                <p class="section-subtitle">Not required, but highly recommended:</p>
+                
+                <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: 1fr; align-items: center;">
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                            <span>Your $10 shirt kicks off your membership</span>
+                        </li>
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                            <span>Every month you receive the top-voted design for $19.95 + S/H</span>
+                        </li>
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                            <span>These are exclusive designs NOT available anywhere else</span>
+                        </li>
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                            <span>Cancel anytime, return shirts you don't love</span>
+                        </li>
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                            <span>By joining, you're grabbing the current shirt at a HUGE discount</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="features-grid">
+                    <div>
+                        <div class="feature-icon">🗳️</div>
+                        <h3>Vote on the design</h3>
+                        <p style="color: var(--textSecondary); margin-top: 0.5rem;">Each month the community votes on the next shirt</p>
+                    </div>
+                    <div>
+                        <div class="feature-icon">🖨️</div>
+                        <h3>We print the winner</h3>
+                        <p style="color: var(--textSecondary); margin-top: 0.5rem;">The winning design gets printed on premium cotton</p>
+                    </div>
+                    <div>
+                        <div class="feature-icon">📦</div>
+                        <h3>It ships to your door</h3>
+                        <p style="color: var(--textSecondary); margin-top: 0.5rem;">Exclusive shirt, delivered monthly, only for members</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-dark">
+            <div class="container">
+                <h2 class="section-title">WHY EVERY SHIRT COUNTS</h2>
+                <p class="section-subtitle">Wear It, Share It, Build It!</p>
+                
+                <div class="mission-card">
+                    <p style="font-size: 1.125rem; line-height: 1.6;">"When you buy a shirt, you're not just getting merch — you're helping build something bigger. A portion of every purchase goes directly toward growing our community, funding better deals, and creating experiences for members like you."</p>
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--cardBorder); display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                        <div style="width: 48px; height: 48px; background: var(--secondary); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">SK</div>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700;">Fomo Goods Community</div>
+                            <div style="color: var(--textSecondary); font-size: 0.875rem;">1,204 Members</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">WHAT MEMBERS SAY</h2>
+                <p class="section-subtitle">Join thousands of happy club members</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"These designs are fire — I look forward to my shirt every month. Best subscription I have."</p>
+                        <div style="margin-top: 1rem; font-weight: 600;">— Marcus T.</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"My favorite subscription. The quality is way better than expected and they fit perfectly."</p>
+                        <div style="margin-top: 1rem; font-weight: 600;">— Sarah J.</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"I love that we get to vote on the designs. Makes it feel personal and part of a real community."</p>
+                        <div style="margin-top: 1rem; font-weight: 600;">— David L.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section background-alt">
+            <div class="container" style="max-width: 800px;">
+                <h2 class="section-title">SIZE CHART</h2>
+                <p class="section-subtitle">Not sure? Order your usual size — our shirts run true to fit.</p>
+                
+                <table class="size-chart">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Chest</th>
+                            <th>Length</th>
+                            <th>Sleeve</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>36"</td><td>28"</td><td>8"</td></tr>
+                        <tr><td>M</td><td>40"</td><td>29"</td><td>8.5"</td></tr>
+                        <tr><td>L</td><td>44"</td><td>30"</td><td>9"</td></tr>
+                        <tr><td>XL</td><td>48"</td><td>31"</td><td>9.5"</td></tr>
+                        <tr><td>2XL</td><td>52"</td><td>32"</td><td>10"</td></tr>
+                        <tr><td>3XL</td><td>56"</td><td>33"</td><td>10.5"</td></tr>
+                        <tr><td>4XL</td><td>60"</td><td>34"</td><td>11"</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem; display: inline-block;">Fomo Goods</div>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">Discover. Collect. Wear the Movement.</p>
+            <div class="footer-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Returns</a>
+                <a href="mailto:support@fomogoods.com">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Image Swapper
+        function swapImage(element, text) {
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('mainImage').innerHTML = `<div class="placeholder-img">Fomo Goods OG Tee<br>${text}</div>`;
+        }
+
+        // Wizard Logic
+        function nextStep(step) {
+            // Remove active from all
+            document.querySelectorAll('.wizard-step').forEach(el => {
+                if(el.classList.contains('active')) {
+                    el.classList.add('exit-left');
+                    setTimeout(() => {
+                        el.classList.remove('active', 'exit-left');
+                    }, 400);
+                }
+            });
+            document.querySelectorAll('.wizard-step-tab').forEach(el => el.classList.remove('active'));
+            
+            // Add active to new
+            setTimeout(() => {
+                document.getElementById('step' + step).classList.add('active');
+                for(let i=1; i<=step; i++) {
+                    document.getElementById('tab' + i).classList.add('active');
+                }
+            }, 50);
+        }
+
+        // Countdown Timer
+        function updateTimer() {
+            const now = new Date();
+            const end = new Date();
+            end.setDate(now.getDate() + (3 - now.getDay() + 7) % 7); // Next Wednesday as example
+            end.setHours(23, 59, 59);
+            
+            let diff = end - now;
+            if(diff < 0) diff = 0;
+            
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / 1000 / 60) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+            
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Submit logic
+        function submitOrder() {
+            const tookBump = document.getElementById('clubBump').checked;
+            if(tookBump) {
+                window.location.href = 'donation-upsell.html';
+            } else {
+                window.location.href = 'club-upsell.html';
+            }
+        }
+    </script>
+</body>
+</html>

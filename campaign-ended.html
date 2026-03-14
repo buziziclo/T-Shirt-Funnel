@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fomo Goods | Campaign Ended</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F00480;
+            --secondary: #040768;
+            --accent: #FFB800;
+            --ctaGreen: #28A745;
+            --background: #FFFFFF;
+            --backgroundAlt: #F8F9FA;
+            --headerBg: #040768;
+            --footerBg: #040768;
+            --textPrimary: #1A1A1A;
+            --textSecondary: #555555;
+            --textWhite: #FFFFFF;
+            --cardBorder: #E8E8E8;
+            --inputBorder: #D0D0D0;
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Satoshi', sans-serif;
+            
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--textPrimary);
+            background-color: var(--backgroundAlt);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        header {
+            background-color: var(--headerBg);
+            color: var(--textWhite);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--textWhite);
+        }
+
+        .support-email {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            text-decoration: none;
+            color: var(--textWhite);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Texture */
+        main::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sold-out-badge {
+            display: inline-block;
+            background-color: var(--textPrimary);
+            color: var(--textWhite);
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            transform: rotate(-2deg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .headline {
+            font-size: 3.5rem;
+            letter-spacing: -1.5px;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .subheadline {
+            font-size: 1.25rem;
+            color: var(--textSecondary);
+            margin-bottom: 3rem;
+        }
+
+        .waitlist-card {
+            background: var(--background);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 1px solid var(--cardBorder);
+            margin-bottom: 2rem;
+        }
+
+        .waitlist-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--textPrimary);
+        }
+
+        .waitlist-desc {
+            color: var(--textSecondary);
+            margin-bottom: 2rem;
+            font-size: 0.9375rem;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .form-group {
+                flex-direction: column;
+            }
+        }
+
+        .form-control {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--inputBorder);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(240, 4, 128, 0.1);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--textWhite);
+        }
+
+        .btn-primary:hover {
+            background-color: #d0036f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 4, 128, 0.3);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            width: 100%;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: var(--textWhite);
+        }
+
+        .success-message {
+            display: none;
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--ctaGreenHover);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(40, 167, 69, 0.2);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: var(--footerBg);
+            color: var(--textWhite);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--textWhite);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Fomo Goods</a>
+        <a href="mailto:support@fomogoods.com" class="support-email">support@fomogoods.com</a>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="sold-out-badge">Campaign Closed</div>
+            
+            <h1 class="headline">You Missed It.</h1>
+            <p class="subheadline">The Fomo Goods OG Tee drop is officially over. We only print what's ordered, and the vault is now locked.</p>
+
+            <div class="waitlist-card">
+                <h2 class="waitlist-title">Don't Miss the Next Drop</h2>
+                <p class="waitlist-desc">Join the waitlist to get early access to Drop #002 before we open it to the public. Limited spots available.</p>
+                
+                <form id="waitlistForm" onsubmit="submitWaitlist(event)">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Enter your best email..." required>
+                        <button type="submit" class="btn btn-primary">Notify Me</button>
+                    </div>
+                </form>
+                
+                <div id="successMessage" class="success-message">
+                    🔥 You're on the list! Keep an eye on your inbox.
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="color: var(--textSecondary); margin-bottom: 1rem; font-weight: 500;">While you wait, come hang out with us:</p>
+                <a href="https://www.skool.com/fomo-goods" class="btn btn-outline" target="_blank">Join the Free Community</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="logo" style="margin-bottom: 1rem; display: inline-block;">Fomo Goods</div>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">Discover. Collect. Wear the Movement.</p>
+        <div class="footer-links">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Returns</a>
+            <a href="mailto:support@fomogoods.com">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        function submitWaitlist(e) {
+            e.preventDefault();
+            // Hide form, show success message
+            document.getElementById('waitlistForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

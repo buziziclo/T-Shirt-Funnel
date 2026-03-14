@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fomo Goods | Join the Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F00480;
+            --secondary: #040768;
+            --accent: #FFB800;
+            --ctaGreen: #28A745;
+            --ctaGreenHover: #218838;
+            --background: #FFFFFF;
+            --backgroundAlt: #F8F9FA;
+            --headerBg: #040768;
+            --footerBg: #040768;
+            --textPrimary: #1A1A1A;
+            --textSecondary: #555555;
+            --textWhite: #FFFFFF;
+            --cardBorder: #E8E8E8;
+            --inputBorder: #D0D0D0;
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Satoshi', sans-serif;
+            
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--textPrimary);
+            background-color: var(--backgroundAlt);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        header {
+            background-color: var(--headerBg);
+            color: var(--textWhite);
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--textWhite);
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .upsell-card {
+            background: var(--background);
+            max-width: 900px;
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid var(--cardBorder);
+        }
+
+        .upsell-header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            background: var(--secondary);
+            color: var(--textWhite);
+            position: relative;
+        }
+
+        .upsell-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .upsell-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .upsell-desc {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .upsell-body {
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .upsell-body {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background-color: var(--backgroundAlt);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--cardBorder);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-img {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--textSecondary);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .pricing-box {
+            background: #FFFDF0;
+            border: 2px dashed var(--accent);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .pricing-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--textPrimary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-amount {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--textPrimary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--inputBorder);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            color: var(--textSecondary);
+        }
+
+        .benefit-icon {
+            color: var(--ctaGreen);
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .btn-success {
+            display: block;
+            width: 100%;
+            background-color: var(--ctaGreen);
+            color: var(--textWhite);
+            padding: 1.25rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+            margin-bottom: 1.5rem;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+
+        .btn-success:hover {
+            background-color: var(--ctaGreenHover);
+            transform: translateY(-2px);
+            animation: none;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .skip-link {
+            display: block;
+            text-align: center;
+            color: var(--textSecondary);
+            text-decoration: underline;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .skip-link:hover {
+            color: var(--textPrimary);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Fomo Goods</a>
+    </header>
+
+    <main>
+        <div class="upsell-card">
+            <div class="upsell-header">
+                <h1 class="upsell-title">JOIN THE Fomo Goods Monthly T-Shirt Club</h1>
+                <p class="upsell-desc">FREE TO JOIN TODAY. Enroll into the Monthly T-Shirt Club where we mail you an exclusive, community-voted design every month. No Contracts. Cancel Anytime. Return the ones you don't love.</p>
+            </div>
+
+            <div class="upsell-body">
+                <div class="product-image">
+                    <div class="placeholder-img">Fomo Goods OG Tee<br>Limited Edition #001</div>
+                </div>
+
+                <div class="upsell-content">
+                    <div class="pricing-box">
+                        <div class="pricing-title">Monthly Club Membership</div>
+                        <div class="pricing-amount">$19.95<span style="font-size: 1rem; color: var(--textSecondary); font-weight: 500;">/month + S/H</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Your Size</label>
+                        <select class="form-control">
+                            <option value="">Select Size...</option>
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">X-Large</option>
+                            <option value="2XL">2XL</option>
+                            <option value="3XL">3XL</option>
+                            <option value="4XL">4XL</option>
+                        </select>
+                    </div>
+
+                    <ul class="benefits-list">
+                        <li class="benefit-item">
+                            <span class="benefit-icon">✅</span>
+                            <span><strong>Exclusive design every month</strong> — voted by the community</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-icon">✅</span>
+                            <span><strong>Designs NOT available anywhere else</strong> — ever</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-icon">✅</span>
+                            <span><strong>Cancel anytime</strong> — no contracts, no commitments</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-icon">✅</span>
+                            <span><strong>Return any shirt you don't love</strong> — we make it easy</span>
+                        </li>
+                    </ul>
+
+                    <div style="font-size: 0.875rem; color: var(--textSecondary); margin-bottom: 1.5rem; text-align: center; background: var(--backgroundAlt); padding: 0.75rem; border-radius: var(--radius-md);">
+                        <em>Using payment method ending in •••• 4242</em>
+                    </div>
+
+                    <button class="btn-success" onclick="submitUpsell()">YES! BECOME A CLUB MEMBER</button>
+                    <a class="skip-link" onclick="skip()">No Thanks, I don't want exclusive shirts</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function submitUpsell() {
+            window.location.href = 'thank-you.html';
+        }
+
+        function skip() {
+            window.location.href = 'thank-you.html';
+        }
+    </script>
+</body>
+</html>
